@@ -6,8 +6,10 @@ import com.mango.mangopic.model.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mango.mangopic.model.vo.LoginUserVO;
 import com.mango.mangopic.model.vo.UserVO;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -54,6 +56,8 @@ public interface UserService extends IService<User> {
     boolean userLogout(HttpServletRequest request);
 
 
+    String changeAvatar(MultipartFile file, String userAccount) throws IOException;
+
     QueryWrapper<User> getQueryWrapper(UserQueryRequest userQueryRequest);
 
     /**
@@ -83,4 +87,13 @@ public interface UserService extends IService<User> {
      * @return
      */
     public String getEncryptPassword(String userPassword);
+
+    /**
+     * 是否为管理员
+     *
+     * @param user
+     * @return
+     */
+    boolean isAdmin(User user);
+
 }

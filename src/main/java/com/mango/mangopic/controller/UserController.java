@@ -16,6 +16,7 @@ import com.mango.mangopic.model.vo.UserVO;
 import com.mango.mangopic.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -166,6 +167,19 @@ public class UserController {
         List<UserVO> userVOList = userService.getUserVOList(userPage.getRecords());
         userVOPage.setRecords(userVOList);
         return ResultUtils.success(userVOPage);
+    }
+
+    /**
+     * 更改头像
+     * @param file
+     * @param userAccount
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/changeAvatar")   //阿里云上传文件
+    public BaseResponse<String> changeAvatar(@RequestParam("file") MultipartFile file, @RequestParam("userAccount") String userAccount) throws Exception{
+        String url = userService.changeAvatar(file, userAccount);
+        return ResultUtils.success(url);
     }
 
 
