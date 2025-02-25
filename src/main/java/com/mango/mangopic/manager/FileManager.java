@@ -29,8 +29,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 已废弃，改为使用upload包的模板方法优化
+ */
 @Service
 @Slf4j
+@Deprecated
 public class FileManager {  
   
     @Resource

@@ -49,7 +49,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     private OSS ossClient;
 
     @Resource
-    private OssClientConfig cosClientConfig;
+    private OssClientConfig ossClientConfig;
 
 
     @Override
@@ -183,10 +183,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         fileName = UUID.randomUUID().toString().replaceAll("-", "") + extension;
 
         //上传到阿里云
-        ossClient.putObject(cosClientConfig.getBucketName(), userAccount + "/" + fileName, inputStream);
+        ossClient.putObject(ossClientConfig.getBucketName(), userAccount + "/" + fileName, inputStream);
 
         //把上传后把文件url返回
-        url = "https://" + cosClientConfig.getBucketName() + "." + cosClientConfig.getEndpoint()
+        url = "https://" + ossClientConfig.getBucketName() + "." + ossClientConfig.getEndpoint()
                 + "/" + userAccount + "/" + fileName;
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -201,7 +201,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if(oldURL != null){
             String oldFileName = oldURL.substring(oldURL.lastIndexOf("/"));
             oldFileName = userAccount + oldFileName;
-            ossClient.deleteObject(cosClientConfig.getBucketName(), oldFileName);
+            ossClient.deleteObject(ossClientConfig.getBucketName(), oldFileName);
         }
 
         user.setUserAvatar(url);
@@ -305,7 +305,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
 
 }
-
-
-
 

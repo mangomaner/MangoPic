@@ -56,4 +56,14 @@ public class OssManager {
         PutObjectRequest putObjectRequest = new PutObjectRequest(ossClientConfig.getBucketName(), key, file);
         return ossClient.putObject(putObjectRequest);
     }
+
+    /**
+     * 删除对象
+     *
+     * @param key 文件 key
+     */
+    public void deleteObject(String key){
+        ossClient.deleteObject(ossClientConfig.getBucketName(), key);
+    }
+
 }
